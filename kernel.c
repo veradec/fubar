@@ -78,6 +78,11 @@ void term_putentry(char c, uint8_t color, size_t x, size_t y){
 }
 
 void term_putchar(char c ){
+  if(c == '\n'){
+    term_col = 0;
+      term_row++;
+      return;
+  }
   term_putentry(c, term_color, term_col, term_row);
   if(++term_col == VGA_WIDTH){
     term_col = 0;
@@ -104,5 +109,5 @@ void term_writestr(const char* data){
 void kernel_main(void)
 {
   term_init();
-  term_writestr("Hello World\n");
+  term_writestr("Hello World\nThis\n\tisFoo");
 }
